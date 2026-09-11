@@ -34,7 +34,8 @@
   "overrides": {
     "strip-bom": "4.0.0",
     "pirates": "4.0.7",
-    "path-exists": "4.0.0"
+    "path-exists": "4.0.0",
+    "make-dir": "4.0.0"
   },
   "engines": {
     "node": "20.x"
