@@ -1,19 +1,12 @@
+<<<<<<< HEAD
 # SIH25018 — Nabha Rural Telemedicine Platform
 
 A complete, production-grade, offline-first telemedicine platform designed for rural healthcare delivery in India. Optimized for low-bandwidth networks, intermittent connectivity, ASHA field workers, doctors, patients, and health administrators.
 
----
 
 ## 1. What Was Built
 
-- **PWA Frontend (`frontend/`)**: Lightweight HTML5/CSS3/Vanilla JS Progressive Web App with 100% offline capability powered by IndexedDB (`nabhaTelemedicine`), Service Worker (`service-worker.js`), multilingual translation engine (English, Hindi, Punjabi), and customized role portals for Patient, ASHA, Doctor, and Admin.
-- **Node.js/Express REST Backend (`backend/`)**: Production REST API running on port 5000 (`pg` pool, JWT auth, RBAC, offline sync idempotency engine, PDF prescription generator, audit logging, and OpenAPI documentation).
-- **Python FastAPI AI Microservice (`ai-service/`)**: Standalone AI service on port 8001 providing explainable rule-based clinical preliminary triage (`LOW`, `MODERATE`, `HIGH`, `EMERGENCY`) with clinical safety disclaimers and pytest test suite.
-- **Background Worker Engine (`worker/`)**: Microservice job worker executing asynchronous task queues (PDF rendering, audit log archiving, sync status sweeps).
-- **Local Health Center Gateway (`gateway/`)**: Network proxy component providing local WAN outage resilience for rural Primary Health Centers (PHC).
-- **Database Engine (`database/`)**: PostgreSQL schema migrations (14+ tables, multi-center hierarchy, `patient_code` `NAB-XXXXXX`) and demo dataset seeds.
 
----
 
 ## 2. Full Workflow for Every Role
 
@@ -39,7 +32,6 @@ A complete, production-grade, offline-first telemedicine platform designed for r
    └─► One-tap emergency escalation trigger (/emergency.html) alerting local ASHA and health center
 ```
 
----
 
 ### Role 2: ASHA FIELD WORKER Workflow (Primary Rural Field Application)
 ```text
@@ -69,7 +61,6 @@ A complete, production-grade, offline-first telemedicine platform designed for r
    └─► Auto-sync flushes operations to central PostgreSQL backend upon network restoration
 ```
 
----
 
 ### Role 3: DOCTOR Workflow
 ```text
@@ -93,7 +84,6 @@ A complete, production-grade, offline-first telemedicine platform designed for r
    └─► Consultation state updated: IN_PROGRESS -> COMPLETED
 ```
 
----
 
 ### Role 4: HEALTH ADMINISTRATOR Workflow
 ```text
@@ -118,7 +108,6 @@ A complete, production-grade, offline-first telemedicine platform designed for r
    └─► Reviews security & operational audit logs (/api/v1/admin/audit-logs)
 ```
 
----
 
 ## 3. Monorepo Directory Structure
 
@@ -197,7 +186,6 @@ nabha-telemedicine/
 └── README.md                   # Master monorepo documentation
 ```
 
----
 
 ## 4. Demo Credentials
 
@@ -208,7 +196,6 @@ nabha-telemedicine/
 | **Patient** | `9876543212` | `[removed demo OTP/password]` | `/patient-dashboard.html` |
 | **Administrator** | `9876543213` | `[removed demo password]` | `/admin-dashboard.html` |
 
----
 
 ## 5. Local Execution Guide
 
@@ -237,7 +224,6 @@ python -m uvicorn app.main:app --host 0.0.0.0 --port 8001
 ```
 Interactive FastAPI docs active at **`http://localhost:8001/docs`**.
 
----
 
 ## 6. Docker Deployment
 
@@ -246,15 +232,10 @@ Launch the multi-container stack (PostgreSQL + Node Backend + Python AI Service)
 docker compose up --build -d
 ```
 
----
 
 ## 7. Testing Results Overview
 
-- **Backend Integration & Security Tests (`backend/`)**: 21 / 21 passed cleanly (`npm test`).
-- **Python FastAPI AI Unit Tests (`ai-service/`)**: 5 / 5 passed cleanly (`pytest`).
-- **Idempotency Verification**: Pushing duplicate `operationId` operations returns `{ idempotent: true, status: 'SYNCED' }` without creating duplicate records.
 
----
 
 ## 8. Prototype Disclaimer & Medical Safety Notice
 
@@ -287,3 +268,7 @@ Patients do not select doctors. The controlled workflow is:
 The request, assignment, acceptance, start and completion states are persisted in the database and linked through `consultation_requests`, `appointments` and `consultations`.
 
 See `docs/CONSULTATION_WORKFLOW.md` for the state machine and security rules.
+=======
+# Telemedicine-
+This is an aid to villages
+>>>>>>> origin/main
