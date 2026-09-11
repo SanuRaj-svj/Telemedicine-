@@ -32,7 +32,8 @@
     "supertest": "^7.0.0"
   },
   "overrides": {
-    "strip-bom": "4.0.0"
+    "strip-bom": "4.0.0",
+    "pirates": "4.0.7"
   },
   "engines": {
     "node": "20.x"
