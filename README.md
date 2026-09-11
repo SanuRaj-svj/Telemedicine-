@@ -268,7 +268,3 @@ Patients do not select doctors. The controlled workflow is:
 The request, assignment, acceptance, start and completion states are persisted in the database and linked through `consultation_requests`, `appointments` and `consultations`.
 
 See `docs/CONSULTATION_WORKFLOW.md` for the state machine and security rules.
-=======
-# Telemedicine-
-This is an aid to villages
->>>>>>> origin/main
