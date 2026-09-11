@@ -25,9 +25,9 @@ async function registerUser(data){
  const name=String(data.name||`${data.firstName||''} ${data.lastName||''}`).trim(); if(name.length<2) throw new ValidationError('Full name is required');
  const accountStatus=role==='PATIENT'?'ACTIVE':'PENDING_APPROVAL';
  const passwordHash=await bcrypt.hash(data.password,Number(process.env.BCRYPT_ROUNDS||12));
+ let patient;
  const result=await db.transaction(async client=>{
    const user=await userRepository.create({name,mobile,email,passwordHash,role,accountStatus},client);
-  let patient;
   if(role==='PATIENT') { const age=data.age||(()=>{if(!data.dateOfBirth)return 18;const d=new Date(data.dateOfBirth);if(Number.isNaN(d.getTime()))return 18;const now=new Date();return Math.max(0,now.getFullYear()-d.getFullYear()-((now.getMonth()<d.getMonth()||now.getMonth()===d.getMonth()&&now.getDate()<d.getDate())?1:0))})(); const patientRow=await client.query(`INSERT INTO patients(user_id,patient_code,name,age,gender,mobile,village,address,emergency_contact,blood_group,allergies,existing_conditions,medical_history,created_by,health_center_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$1,$14) RETURNING id,patient_code,name,age,gender,mobile,village,address,emergency_contact,blood_group,allergies,existing_conditions,medical_history,health_center_id,sync_status,created_at,updated_at`,[user.id,generatePatientCode(),name,age,gender||'Other',mobile||'',data.village||'Not specified',data.address||null,data.emergencyContact||null,data.bloodGroup||'Unknown',data.allergies||'None',data.existingConditions||'None',data.medicalHistory||'None',data.healthCenterId||null]); patient=patientRow.rows[0]; }
    if(role==='ASHA') await client.query(`INSERT INTO asha_applications(user_id,application_data,status) VALUES($1,$2,'PENDING')`,[user.id,JSON.stringify(data)]);
    if(role==='DOCTOR') {
