@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: chikitsaConnect
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix backend --omit=dev --no-package-lock
+    preDeployCommand: npm run db:migrate --prefix backend
+    startCommand: npm start --prefix backend
+    healthCheckPath: /health
