@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#006666">
+  <title>Create Administrator | Nabha Telemedicine</title>
+  <link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/main.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/forms.css"><link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/accessibility.css"><link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page">
+  <header class="login-header"><div class="login-container login-nav"><a href="admin-dashboard.html" class="login-brand"><span class="login-brand-mark" aria-hidden="true">+</span><span class="login-brand-name">Nabha Telemedicine</span></a><div class="login-nav-right"><a href="admin-dashboard.html" class="btn btn-outline btn-sm">Back to dashboard</a></div></div></header>
+  <main class="login-main"><div class="login-container"><section class="login-card" aria-labelledby="admin-create-title">
+    <div class="login-card-header"><div class="login-icon" aria-hidden="true">&#128100;</div><div class="login-heading"><div class="login-eyebrow">Administrator only</div><h1 id="admin-create-title">Create administrator</h1><p>Add an active administrator account for a trusted member of your operations team.</p></div></div>
+    <div id="adminCreateMessage" class="login-message" role="alert" aria-live="polite" hidden></div>
+    <form id="adminCreateForm" class="login-form" novalidate autocomplete="off">
+      <div class="form-field"><label for="adminName">Full name</label><input id="adminName" type="text" required maxlength="120" autocomplete="name"></div>
+      <div class="form-field"><label for="adminEmail">Email address</label><input id="adminEmail" type="email" required maxlength="255" autocomplete="email"></div>
+      <div class="form-field"><label for="adminMobile">Mobile number</label><input id="adminMobile" type="tel" required maxlength="15" inputmode="tel" autocomplete="tel"></div>
+      <div class="form-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" required minlength="12" maxlength="128" autocomplete="new-password"><small class="field-hint">Use at least 12 characters.</small></div>
+      <div class="form-field"><label for="adminPasswordConfirmation">Confirm password</label><input id="adminPasswordConfirmation" type="password" required minlength="12" maxlength="128" autocomplete="new-password"></div>
+      <button type="submit" id="adminCreateButton" class="login-submit">Create administrator</button>
+    </form>
+    <div class="login-security"><span aria-hidden="true">&#10003;</span><p>The backend restricts this action to active administrators and records it in the audit log.</p></div>
+  </section></div></main>
+  <script src="js/config.js?v=5.0.0"></script><script src="js/api.js?v=5.0.0"></script><script src="js/auth.js?v=5.0.0"></script><script src="js/admin-create.js?v=1.0.0"></script>
+</body>
+</html>
