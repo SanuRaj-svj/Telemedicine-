@@ -53,17 +53,19 @@ async function registerUser(data){
  });
  return {user:publicUser(result),...(role==='PATIENT'?{patient:{id:patient.id,patientCode:patient.patient_code,name:patient.name,age:patient.age,gender:patient.gender,mobile:patient.mobile,village:patient.village,address:patient.address,emergencyContact:patient.emergency_contact,bloodGroup:patient.blood_group,allergies:patient.allergies,existingConditions:patient.existing_conditions,medicalHistory:patient.medical_history,healthCenterId:patient.health_center_id,syncStatus:patient.sync_status,createdAt:patient.created_at,updatedAt:patient.updated_at}}:{}),requiresApproval:accountStatus!=='ACTIVE'};
 }
-async function login(identifier,password){
+async function login(identifier,password,requiredRole=null){
  const id=String(identifier||'').trim(); assertPassword(password); if(!id) throw new AuthenticationError('Email or mobile number is required');
  const user=await userRepository.findByIdentifier(normalizeMobile(id) || id); if(!user) throw new AuthenticationError('Invalid email/mobile or password');
  const ok=await bcrypt.compare(password,user.passwordHash||''); if(!ok) throw new AuthenticationError('Invalid email/mobile or password');
  if(user.accountStatus==='PENDING_APPROVAL'||user.accountStatus==='PENDING'||user.accountStatus==='UNDER_REVIEW') { const e=new Error('Your account is pending administrative approval');e.code='ACCOUNT_PENDING_APPROVAL';throw e; }
  if(['SUSPENDED','DISABLED','DEACTIVATED'].includes(user.accountStatus)||user.isActive===false){const e=new Error('Your account is disabled');e.code='ACCOUNT_DISABLED';throw e;}
  if(user.accountStatus==='REJECTED'){const e=new Error('Your account application was rejected');e.code='ACCOUNT_REJECTED';throw e;}
+ if(requiredRole&&user.role!==requiredRole) { const e=new Error('This sign-in is restricted to administrators');e.code='ADMIN_LOGIN_REQUIRED';e.statusCode=403;throw e; }
  const fresh=await userRepository.touchLogin(user.id); const accessToken=generateAccessToken(fresh); const refreshToken=generateRefreshToken(fresh);
  await persistRefreshToken(fresh.id, refreshToken);
  return {user:publicUser(fresh),accessToken,refreshToken};
 }
+async function adminLogin(identifier,password){return login(identifier,password,'ADMIN');}
 async function refreshSession(refreshToken){
  if(!refreshToken) throw new AuthenticationError('Refresh token is required');
  const decoded=verifyRefreshToken(refreshToken);
@@ -78,4 +80,4 @@ async function refreshSession(refreshToken){
 }
 async function logoutSession(refreshToken){ if(refreshToken) await db.query('UPDATE refresh_tokens SET revoked_at=NOW() WHERE token_hash=$1 AND revoked_at IS NULL',[hashRefreshToken(refreshToken)]); return true; }
 async function getCurrentUser(id){const u=await userRepository.findById(id); if(!u) throw new Error('User not found'); return publicUser(u);}
-module.exports={registerUser,registerPatient:data=>registerUser({...data,role:'PATIENT'}),registerProfessional:registerUser,login,refreshSession,logoutSession,getCurrentUser};
+module.exports={registerUser,registerPatient:data=>registerUser({...data,role:'PATIENT'}),registerProfessional:registerUser,login,adminLogin,refreshSession,logoutSession,getCurrentUser};

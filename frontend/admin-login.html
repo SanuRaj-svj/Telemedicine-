@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#006666">
+  <title>Administrator Sign In | Nabha Telemedicine</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/accessibility.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page">
+  <header class="login-header"><div class="login-container login-nav"><a href="index.html" class="login-brand" aria-label="Nabha Telemedicine home"><span class="login-brand-mark" aria-hidden="true">+</span><span class="login-brand-name">Nabha Telemedicine</span></a><div class="login-nav-right"><span class="login-nav-text">Need patient or staff access?</span><a href="login.html" class="btn btn-outline btn-sm">Main sign in</a></div></div></header>
+  <main class="login-main"><div class="login-container"><section class="login-card" aria-labelledby="admin-login-title">
+    <div class="login-card-header"><div class="login-icon" aria-hidden="true">&#128274;</div><div class="login-heading"><div class="login-eyebrow">Restricted access</div><h1 id="admin-login-title">Administrator sign in</h1><p>Use your active administrator email or mobile number.</p></div></div>
+    <div id="adminLoginMessage" class="login-message" role="alert" aria-live="polite" hidden></div>
+    <form id="adminLoginForm" class="login-form" novalidate autocomplete="on">
+      <div class="form-field"><label for="adminIdentifier">Administrator email or mobile</label><input type="text" id="adminIdentifier" name="identifier" autocomplete="username" required maxlength="150" placeholder="Enter email or mobile"></div>
+      <div class="form-field"><div class="field-label-row"><label for="adminPassword">Password</label><a href="forgot-password.html" class="forgot-password">Forgot password?</a></div><div class="password-wrapper"><input type="password" id="adminPassword" name="password" autocomplete="current-password" required maxlength="128" placeholder="Enter your password"><button type="button" id="toggleAdminPassword" class="password-toggle" aria-label="Show password">&#128065;</button></div></div>
+      <button type="submit" id="adminLoginButton" class="login-submit"><span id="adminLoginButtonText">Sign In Securely</span><span id="adminLoginButtonLoader" hidden>Signing in...</span></button>
+    </form>
+    <div class="login-security"><span aria-hidden="true">&#10003;</span><p>Administrator access is validated by the backend before a session is created.</p></div>
+  </section></div></main>
+  <footer class="login-footer"><div class="login-container login-footer-content"><span>&copy; 2026 Nabha Telemedicine</span><div class="login-footer-links"><a href="index.html">Home</a><a href="login.html">Main sign in</a></div></div></footer>
+  <script src="js/config.js?v=5.0.0"></script><script src="js/api.js?v=5.0.0"></script><script src="js/admin-login.js?v=1.0.0"></script>
+</body>
+</html>
