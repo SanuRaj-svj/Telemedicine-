@@ -10,7 +10,8 @@
     "test:watch": "jest --watch",
     "db:migrate": "node src/scripts/migrate.js",
     "db:rollback": "node src/scripts/rollback.js",
-    "db:seed": "node src/scripts/seed.js"
+    "db:seed": "node src/scripts/seed.js",
+    "admin:create": "node src/scripts/create-admin.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
